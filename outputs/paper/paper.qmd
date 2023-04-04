@@ -2,8 +2,7 @@
 title: "My title"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
+  - Huda Sahaf
 thanks: "Code and data are available at: LINK."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
@@ -19,8 +18,139 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(janitor)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(RColorBrewer)
 ```
+
+```{r}
+### Clean Fashion Tones Dataset: 
+cleaned_fashion_tones <-
+  clean_names(fashion_tones)
+
+cleaned_fashion_tones <-
+  cleaned_fashion_tones |>
+  rename(
+    skintone = tone,
+    lightness_value = l
+  )
+head(cleaned_fashion_tones)
+```
+
+```{r}
+### Simplifying Dates: Fashion Tones Dataset:
+cleaned_fashion_tones<-
+  cleaned_fashion_tones |>
+  separate(
+    col = date,
+    into = c("Month", "Day", "Year"),
+    sep = "/"
+  ) |>
+  select(-Day)|>
+  mutate(cleaned_fashion_tones, Date = paste(Year, Month, sep = "-"))
+
+```
+
+```{r}
+### Modeling Full Spread of Complexion Values on Vogue Covers from 2000-2018
+cleaned_fashion_tones |>
+  ggplot(aes(x = lightness_value, y = Date)) +
+  geom_point(aes(color = lightness_value < 0.4)) +
+  theme_classic() +
+  labs(
+    x = "Lightness Value of the Models",
+    y = "Date of Cover",
+    title = "Complexions of Models on Covers of Vogue: 2000-2018"
+  )
+  
+
+```
+
+```{r}
+### Clean Fashion Frequency Data Set: 
+cleaned_fashion_frequency<-
+  clean_names(fashion_frequency)
+
+cleaned_fashion_frequency <-
+  cleaned_fashion_frequency |>
+  rename(
+    skintone = tone,
+    lightness_value = l,
+    num_covers = n_covers
+  )
+
+```
+
+```{r}
+### Table 1: All Models With More than 5 Appearances on Vogue 
+cleaned_fashion_frequency |>
+  select(model, num_covers, lightness_value) |>
+  group_by(num_covers) |>
+  filter(num_covers > 4) |>
+  kable(
+    col.names = c(
+      "Model",
+      "Number of Covers", 
+      "Lightness Value"
+    ),
+    digits = 2
+  )
+
+```
+
+```{r}
+### Graph 2: Case Study: Rihanna's 5 Appearances and the respective Complexion Values:
+cleaned_fashion_tones|>
+  group_by(model)|>
+  filter(model=="Rihanna")|>
+  ggplot(mapping = aes(x = Year, y = lightness_value, color = model)) +
+  geom_point()+
+  labs(
+    title = "Rihanna: A Case Study in White-Washing",
+    y = "Complexion Value",
+    color = "Model"
+  )
+
+  
+```
+
+
+```{r}
+### Graph 3: The Top 4 Deepest Complexion Models on Vogue
+cleaned_fashion_tones|>
+  filter(model== "Lupita Nyongo" | model=="Rihanna"| model == "Michelle Obama" | model == "Serena Williams") |>
+  ggplot(aes(y = lightness_value, color = model)) +
+  geom_boxplot() +
+  theme_light() +
+  labs(
+    y = "Lightness Value of Skintone",
+    title = "Appearances of Deepest Complexion Models on Vogue"
+  )
+```
+
+```{r}
+### Graph 4: Models with the Highest Number of Appearances on Vogue and their respective Complexion Values
+cleaned_fashion_tones|>
+  filter(model== "Nicole Kidman" | model=="Gisele Bundchen"| model == "Charlize Theron" | model == "Sarah Jessica Parker") |>
+  ggplot(aes(y = lightness_value, color = model)) +
+  geom_boxplot() +
+  theme_light() +
+  labs(
+    y = "Lightness Value of Skintone",
+    title = "Complexions of Models with Highest Number of Vogue Covers" 
+  )
+
+```
+
+
+```{r}
+
+```
+
+
 
 
 # Introduction
