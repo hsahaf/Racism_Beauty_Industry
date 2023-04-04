@@ -27,6 +27,11 @@ library(RColorBrewer)
 ```
 
 ```{r}
+#| include: false
+#| warning: false
+#| echo: false
+#| message: false
+
 ### Clean Fashion Tones Dataset: 
 cleaned_fashion_tones <-
   clean_names(fashion_tones)
@@ -41,6 +46,11 @@ head(cleaned_fashion_tones)
 ```
 
 ```{r}
+#| include: false
+#| warning: false
+#| echo: false
+#| message: false
+
 ### Simplifying Dates: Fashion Tones Dataset:
 cleaned_fashion_tones<-
   cleaned_fashion_tones |>
@@ -55,21 +65,11 @@ cleaned_fashion_tones<-
 ```
 
 ```{r}
-### Modeling Full Spread of Complexion Values on Vogue Covers from 2000-2018
-cleaned_fashion_tones |>
-  ggplot(aes(x = lightness_value, y = Date)) +
-  geom_point(aes(color = lightness_value < 0.4)) +
-  theme_classic() +
-  labs(
-    x = "Lightness Value of the Models",
-    y = "Date of Cover",
-    title = "Complexions of Models on Covers of Vogue: 2000-2018"
-  )
-  
+#| include: false
+#| warning: false
+#| echo: false
+#| message: false
 
-```
-
-```{r}
 ### Clean Fashion Frequency Data Set: 
 cleaned_fashion_frequency<-
   clean_names(fashion_frequency)
@@ -85,6 +85,59 @@ cleaned_fashion_frequency <-
 ```
 
 ```{r}
+#| include: false
+#| warning: false
+#| echo: false
+#| message: false
+
+### Clean Makeup Shades Data Set:
+cleaned_makeup_shades <-
+  clean_names(makeup_shades)
+
+cleaned_makeup_shades<-
+  cleaned_makeup_shades |>
+  rename(
+    hue = h,
+    lightness = l,
+    saturation = s,
+    value = v,
+    hex_code = hex
+  )|>
+  mutate(lightness_value = lightness/100)
+
+cleaned_makeup_shades<-
+  cleaned_makeup_shades |>
+  filter(group == 0|group == 1|group == 2|group == 3|group == 4)
+  
+```
+
+```{r}
+#| warning: false
+#| echo: false
+#| label: fig-fullspread
+#| fig-cap: Complexion Values of All Models on Vogue Covers from 2000-2018
+### Modeling Full Spread of Complexion Values on Vogue Covers from 2000-2018
+cleaned_fashion_tones |>
+  ggplot(aes(x = lightness_value, y = Date)) +
+  geom_point(aes(color = lightness_value < 0.4)) +
+  theme_classic() +
+  labs(
+    x = "Lightness Value of the Models",
+    y = "Date of Cover",
+    title = "Complexions of Models on Covers of Vogue: 2000-2018"
+  )
+  
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| tbl-cap: "Models With More than 5 Appearances on Vogue"
+#| label: tbl-appearances
 ### Table 1: All Models With More than 5 Appearances on Vogue 
 cleaned_fashion_frequency |>
   select(model, num_covers, lightness_value) |>
@@ -102,6 +155,10 @@ cleaned_fashion_frequency |>
 ```
 
 ```{r}
+#| warning: false
+#| echo: false
+#| label: fig-whitewashing
+#| fig-cap: Rihanna's Appearances on Vogue
 ### Graph 2: Case Study: Rihanna's 5 Appearances and the respective Complexion Values:
 cleaned_fashion_tones|>
   group_by(model)|>
@@ -119,6 +176,10 @@ cleaned_fashion_tones|>
 
 
 ```{r}
+#| warning: false
+#| echo: false
+#| label: fig-deepest
+#| fig-cap: Top 4 Deepest Complexion Models on Vogue
 ### Graph 3: The Top 4 Deepest Complexion Models on Vogue
 cleaned_fashion_tones|>
   filter(model== "Lupita Nyongo" | model=="Rihanna"| model == "Michelle Obama" | model == "Serena Williams") |>
@@ -132,6 +193,10 @@ cleaned_fashion_tones|>
 ```
 
 ```{r}
+#| warning: false
+#| echo: false
+#| label: fig-all_white
+#| fig-cap: Models with Highest Number of Appearances
 ### Graph 4: Models with the Highest Number of Appearances on Vogue and their respective Complexion Values
 cleaned_fashion_tones|>
   filter(model== "Nicole Kidman" | model=="Gisele Bundchen"| model == "Charlize Theron" | model == "Sarah Jessica Parker") |>
@@ -147,10 +212,72 @@ cleaned_fashion_tones|>
 
 
 ```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| tbl-cap: "US Makeup Brands: Foundation Shade Range"
+#| label: tbl-shades
+
+### Table 2: All US Brands and Their Number of Foundation Shades
+cleaned_makeup_shades|>
+  select(brand, product, lightness_value)|>
+  group_by(brand) |>
+  summarise(total_shades = n()) |>
+  kable(
+    col.names = c(
+      "Makeup Brand",
+      "Number of Foundation Shades"
+      )
+  )
 
 ```
 
 
+
+```{r}
+#| warning: false
+#| echo: false
+#| label: fig-bestsellers
+#| fig-cap: The Shade Distribution of Best-Selling Foundations in the U.S
+### Graph 5: US Bestseller Foundations and Their Inclusivity 
+cleaned_makeup_shades|>
+  filter(group == 2)|>
+  group_by(brand)|>
+  ggplot(aes(x = lightness_value, color = brand)) +
+  stat_ecdf(geom = "point") +
+  theme_classic()
+
+```
+
+```{r}
+#| warning: false
+#| echo: false
+#| label: fig-bipoc
+#| fig-cap: The Shade Distribution of BiPOC-owned Makeup Brands
+### Graph 5: BiPOC Reccs of Brands with BiPOC Founder Bestseller Foundations and Their Inclusivity 
+cleaned_makeup_shades|>
+  filter(group == 3)|>
+  group_by(brand)|>
+  ggplot(aes(x = lightness_value, color = brand)) +
+  stat_ecdf(geom = "point") +
+  theme_classic()
+```
+
+
+```{r}
+#| warning: false
+#| echo: false
+#| label: fig-bigboys
+#| fig-cap: The Shade Distribution of Largest Shade Ranges Offered in the U.S
+### Graph Range of Shades With Brands with Largest Shade Ranges
+cleaned_makeup_shades|>
+  filter(brand == "Beauty Bakerie"|brand == "Bobbi Brown" |brand == "bareMinerals" |brand == "Bobbi Brown" | brand == "MAC"| brand == "Maybelline"|brand == "Estée Lauder"|brand == "Fenty"|brand == "Lancôme"|brand == "Make Up For Ever")|> 
+  ggplot(cleaned_makeup_shades, mapping = aes(x = brand, y = lightness_value)) + 
+  geom_boxplot() +
+  geom_jitter(alpha = 0.3, width = 0.15, height = 0) +
+  theme_minimal()
+  
+```
 
 
 # Introduction
