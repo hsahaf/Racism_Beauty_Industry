@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: LINK."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper aims to investigate the history of racism in the beauty industry and how this impacts the inclusivity in the market. The complexions of models are assigned a lightness value and analyzed across 8 years. These results are compared to the foundation shade ranges across all major makeup brands across the U.S revealing a continuation of compounding racism within the industry as a whole."
 format: pdf
 number-sections: true
 bibliography: references.bib
