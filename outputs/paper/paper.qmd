@@ -3,7 +3,7 @@ title: "The Shades of Racism in the Beauty Industry"
 subtitle: "An exploration of inclusivity and tokenism within fashion and makeup"
 author: 
   - Huda Sahaf
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/hsahaf/Racism_Beauty_Industry.git."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
 abstract: "This paper aims to investigate the history of racism in the beauty industry and how this impacts the inclusivity in the market. The complexions of models are assigned a lightness value and analyzed across 8 years. These results are compared to the foundation shade ranges across all major makeup brands across the U.S revealing a continuation of compounding racism within the industry as a whole."
