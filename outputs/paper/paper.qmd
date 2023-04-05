@@ -1,6 +1,6 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "The Shades of Racism in the Beauty Industry"
+subtitle: "An exploration of inclusivity and tokenism within fashion and makeup"
 author: 
   - Huda Sahaf
 thanks: "Code and data are available at: LINK."
@@ -23,14 +23,40 @@ library(dplyr)
 library(ggplot2)
 library(kableExtra)
 library(knitr)
+library(readr)
 library(RColorBrewer)
 ```
 
 ```{r}
-#| include: false
-#| warning: false
-#| echo: false
-#| message: false
+fashion_tones <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/faces.csv", 
+    skip = 0 
+  )
+
+fashion_frequency <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/models.csv", 
+    skip = 0 
+  )
+
+makeup_shades <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/makeup-shades/shades.csv", 
+    skip = 0 
+  )
+
+#### Save data ####
+
+write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv")) 
+
+write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv")) 
+
+write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv")) 
+         
+```
+
+```{r}
 
 ### Clean Fashion Tones Dataset: 
 cleaned_fashion_tones <-
@@ -44,6 +70,7 @@ cleaned_fashion_tones <-
   )
 head(cleaned_fashion_tones)
 ```
+
 
 ```{r}
 #| include: false
@@ -282,6 +309,7 @@ cleaned_makeup_shades|>
 
 # Introduction
 
+
 You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
 
 
@@ -294,35 +322,12 @@ Our data is of penguins (@fig-bills).
 #| label: fig-bills
 #| fig-cap: Bills of penguins
 #| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
 ```
 
 Talk more about it.
 
 Also bills and their average (@fig-billssssss). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work.)
 
-```{r}
-#| label: fig-billssssss
-#| fig-cap: More bills of penguins
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
 
 Talk way more about it. 
 
