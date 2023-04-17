@@ -25,6 +25,7 @@ library(kableExtra)
 library(knitr)
 library(readr)
 library(RColorBrewer)
+library(scales)
 ```
 
 ```{r}
@@ -86,8 +87,8 @@ cleaned_fashion_tones<-
     into = c("Month", "Day", "Year"),
     sep = "/"
   ) |>
-  select(-Day)|>
-  mutate(cleaned_fashion_tones, Date = paste(Year, Month, sep = "-"))
+  mutate(cleaned_fashion_tones, clean_date = paste(Year, Month, Day, sep = "-"))
+  str(cleaned_fashion_tones$clean_date)
 
 ```
 
@@ -139,25 +140,27 @@ cleaned_makeup_shades<-
 ```
 
 ```{r}
-#| warning: false
-#| echo: false
 #| label: fig-fullspread
 #| fig-cap: Complexion Values of All Models on Vogue Covers from 2000-2018
 ### Modeling Full Spread of Complexion Values on Vogue Covers from 2000-2018
-cleaned_fashion_tones |>
-  ggplot(aes(x = lightness_value, y = Date)) +
-  geom_point(aes(color = lightness_value < 0.4)) +
-  theme_classic() +
+cleaned_fashion_tones$clean_date <- ymd(cleaned_fashion_tones$clean_date)
+
+entire_spread <- cleaned_fashion_tones |>
+  ggplot(aes(x = lightness_value, y = clean_date)) +
+  geom_point(aes(color = lightness_value < 0.4)) + 
   labs(
-    x = "Lightness Value of the Models",
+    x = "Lightness Value of Vogue Models",
     y = "Date of Cover",
     title = "Complexions of Models on Covers of Vogue: 2000-2018"
-  )
+  ) +
+  theme_classic()
   
-
+datebreaks <- seq(as.Date("2001-01-01"), as.Date("2018-09-01"), by = "1 year") 
+  
+print(entire_spread)
 ```
 
-
+@fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is 
 
 ```{r}
 #| message: false
@@ -316,6 +319,9 @@ You can and should cross-reference sections and sub-sections. For instance, @sec
 
 # Data {#sec-data}
 
+## Data Management
+In order to conduct an analysis on the various parts of the beauty industry, three separate datasets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd.
+This paper utilizes the 
 Our data is of penguins (@fig-bills).
 
 ```{r}
