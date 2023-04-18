@@ -140,6 +140,9 @@ cleaned_makeup_shades<-
 ```
 
 ```{r}
+#| message: false
+#| warning: false
+#| echo: false
 #| label: fig-fullspread
 #| fig-cap: Complexion Values of All Models on Vogue Covers from 2000-2018
 ### Modeling Full Spread of Complexion Values on Vogue Covers from 2000-2018
@@ -159,8 +162,6 @@ datebreaks <- seq(as.Date("2001-01-01"), as.Date("2018-09-01"), by = "1 year")
   
 print(entire_spread)
 ```
-
-@fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is 
 
 ```{r}
 #| message: false
@@ -183,6 +184,7 @@ cleaned_fashion_frequency |>
   )
 
 ```
+
 
 ```{r}
 #| warning: false
@@ -221,6 +223,7 @@ cleaned_fashion_tones|>
     title = "Appearances of Deepest Complexion Models on Vogue"
   )
 ```
+
 
 ```{r}
 #| warning: false
@@ -262,8 +265,6 @@ cleaned_makeup_shades|>
 
 ```
 
-
-
 ```{r}
 #| warning: false
 #| echo: false
@@ -278,13 +279,12 @@ cleaned_makeup_shades|>
   theme_classic()
 
 ```
-
 ```{r}
 #| warning: false
 #| echo: false
 #| label: fig-bipoc
 #| fig-cap: The Shade Distribution of BiPOC-owned Makeup Brands
-### Graph 5: BiPOC Reccs of Brands with BiPOC Founder Bestseller Foundations and Their Inclusivity 
+### Graph 5: BiPOC Recomendations of Brands with BiPOC Founder Bestseller Foundations and Their Inclusivity 
 cleaned_makeup_shades|>
   filter(group == 3)|>
   group_by(brand)|>
@@ -292,7 +292,6 @@ cleaned_makeup_shades|>
   stat_ecdf(geom = "point") +
   theme_classic()
 ```
-
 
 ```{r}
 #| warning: false
@@ -308,7 +307,6 @@ cleaned_makeup_shades|>
   theme_minimal()
   
 ```
-
 
 # Introduction
 
@@ -327,28 +325,31 @@ In order to conduct an analysis on the various parts of the beauty industry, thr
 The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States. 
 
 
-
-Our data is of penguins (@fig-bills).
-
 ```{r}
 #| label: fig-bills
 #| fig-cap: Bills of penguins
 #| echo: false
 ```
 
-Talk more about it.
-
-Also bills and their average (@fig-billssssss). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work.)
-
-
-Talk way more about it. 
-
-Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
 # Results
+@fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is measured on a scale from 0 to 1, 1 being extremely pale in skin tone, and 0 being extremely deep. There is a general trend present almost immediately, in that across the entire 8 year period, Vogue has consistently had lighter skinned individuals with a lightness value of 0.5 to 0.8 on their covers. It has only been after around 2009 that we see a model on Vogue with a complexion deeper than 0.4.
+
+@tbl-appearances is a table of all the models on Vogue who have had more than 4 appearances on the covers of Vogue between 2000 and 2018. In all of the names on this list, Rihanna is the only black woman, and her average lightness value across these five appearances has been fairly midtoned, at a lightness value of 0.62.
+
+@fig-whitewashing takes a closer look at Vogue's presentation of Rihanna's skintone on her five appearances. Vogue has been publicly accused of whitewashing Rihanna's complexion on some of her covers, and it is apparent that only after 2016 does her lightness value drop below 0.4 [@whitewashed]. While lighting and editing can account for some fluctuations in the lightness value, but it does not explain the extent of the contrast between her first three appearances and her most recent two.
+
+@fig-deepest takes a closer look at the fluctuations in lightness values in the appearances on the models with the deepest complexions on Vogue. Rihanna has had the highest number of appearances at 5 total covers from 2000 to 2018, followed by Lupita Nyongo, at 4. Amongst these models, Lupita Nyongo has the deepest complexion and her appearances on Vogue are the most recent, her last two being in 2015 and in 2018. The fluctuation is apparent in her appearances as well, in that it is only in her most recent cover that her lightness value is shown to be deeper than 0.3. 
+
+@fig-all_white shows the fluctuation in the lightness values of the top four models with the greatest number of covers on Vogue. All four of these models are white, and all of them have made appearances in 6 or more covers. Vogue's preferences for tanned white women is clear in that in the span of 8 years, the lightness value rarely drops below 0.6.
+
+@tbl-shades is a table of all of the major beauty brands that are based in the United States, and the number of shades in their main foundation line.
+
+@fig-bestsellers takes a closer look at the inclusivity of the bestselling foundation lines across some of the largest beauty brands across the United States of America. It is clear that there are a greater number of shades available for people with lighter skin tones, with a lightness value of 0.6 or lighter, across all of the major brands. However, for people with a complexion that is a hair deeper than a medium skin tone, the number of shades become sparse, and the distribution spreads out as the lightness value becomes deeper than 0.5.
+
+@fig-bipoc looks at the shade distributions of the retailers with owners that are black, indigenous, or other people of color. The distribution is much more even, and all of these beauty brands provide options for people that are on both sides of the spectrum, complexions with lightness values deeper than 0.3, as well as complexions with lightness values paler than 0.8.
+
+@fig-bigboys looks at the distribution across the beauty brands based in the United States with a foundation line with more than 25 shades. The contrast between the number of shades provided for people with light to medium complexions (0.6-1) and the lack thereof in terms of the number of shades for people with deeper complexions (0-0.35) is apparent.
+
 
 # Discussion
 
