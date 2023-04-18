@@ -358,9 +358,10 @@ The data set behind The Pudding article, *Beauty Brawl* is the third data set us
 
 # Discussion
 
+
 ## First discussion point {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+The same trend exists across the entire beauty industry. The deeper your complexion, the less options there are available for you. There are far less doors open for people of color in the beauty space, which causes several issues to compound. There is intersectionality at present in the communities of people impacted by this cycle of racism. Not only are these individuals at a disadvantage in society because they are women, but the issues are compounded further if they are individuals of color. These industries feed into each other, the less representation there is for black and brown women in fashion, the less options will be made available in the beauty industry and vice versa. The lack of representation creates a scarcity mindset. These women feel like they are the exception rather than the norm, and without the options available, without the same advantage of seeing people like you succeed, you are less likely to feel safe in these spaces and less confident when it comes to seeking to be in them. But the presence of black and brown women in these spaces has a significant impact. An example of this is in the beauty industry. The 'Pull Up or Shut Up' movement in 2020 forced beauty brands to reveal how many BiPOC women were staff members and in senior leadership positions[@pullup]. It pushed for transparency in their marketing claims and resulted in a significant increase in consumer awareness, customers were now able to support brands that supported them. However, the same cannot be said for the fashion industry. The beauty industry is a commercial space that is not as difficult to break into through the rise of beauty influences, but high fashion is still considered to be a very elitist institution. BiPOC women have the power to revolutionize the beauty industry as a whole, but the lack of representation makes the path significantly harder. The compounding racism bleeds into other industries as well, such as television and film, and which hurts young girls the most. Looking into a world that has not made any room for you can be a very difficult and disheartening thing to overcome for children. Despite claims made by major institutions, this data reveals that it is only recently that black and brown women have been able to break into the industry, and it still has a long way to go in terms of actually uplifting and empowering them.
 
 ## Second discussion point
 
@@ -369,16 +370,6 @@ If my paper were 10 pages, then should be be at least 2.5 pages. The discussion 
 ## Weaknesses and next steps
 
 Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
-
-
-# Additional details
-
 
 \newpage
 
