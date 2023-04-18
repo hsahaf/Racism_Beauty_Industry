@@ -327,6 +327,7 @@ In order to conduct an analysis on the various parts of the beauty industry, thr
 The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States. 
 
 
+
 Our data is of penguins (@fig-bills).
 
 ```{r}
