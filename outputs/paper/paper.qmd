@@ -318,10 +318,15 @@ You can and should cross-reference sections and sub-sections. For instance, @sec
 
 
 # Data {#sec-data}
-
 ## Data Management
-In order to conduct an analysis on the various parts of the beauty industry, three separate datasets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd.
-This paper utilizes the 
+All analysis on the data sets were done using R [@citeR]. The data was read in, cleaned, and manipulated using `dplyr`[@dan], `tidyverse` [@tidy], and `janitor` [@janice]. The graphs and tables in this paper were coded using the following packages: `ggplot2` [@gabe], `kableExtra`[@kev], `knitr` [@nat], `readr` [@ron], and `RColorBrewer`[@ryan].
+
+## Source and Sampling
+In order to conduct an analysis on the various parts of the beauty industry, three separate data sets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd. A closer look is taken at Vogue using the first two data sets used for the article *Colorism in High Fashion* [@high_f]. All covers of Vogue from the year 2000 to 2018 are analyzed and categorized in these data sets. The female models on each cover are identified, and then their skin tones are filtered out of the cover, and an average color value is assigned based on the all skin tone pixels. These color values are then drained of any hue or saturation and therefore assigned a lightness value based on how light or deep the complexion of the model is, which allows for the comparison of all models on the covers of Vogue over the span of 8 years. The first data set contains the name of the model, date of their appearance on Vogue, the hex code of their skin tone, and their lightness value once the hue and saturation has been removed. This includes multiple appearances of the same model. The second data set contains the names of the models, the hex code of their skin tone, the number of covers they have made appearances in, and their average lightness value across these appearances.
+
+The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States. 
+
+
 Our data is of penguins (@fig-bills).
 
 ```{r}
@@ -336,16 +341,6 @@ Also bills and their average (@fig-billssssss). (You can change the height and w
 
 
 Talk way more about it. 
-
-
-
-# Model
-
-$$
-Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
-$$ {#eq-bayes}
-
-@eq-bayes seems useful, eh?
 
 Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
 
