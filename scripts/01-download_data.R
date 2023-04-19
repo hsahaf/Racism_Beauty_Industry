@@ -13,6 +13,7 @@ library(readr)
 library(tidyverse)
 library(here)
 library(dplyr)
+library(arrow)
 
 #There are three data sets used for this analysis. All three are data sets used in
 # the Puddings Publications, specifically, Beauty Brawl and Colorism in High Fashion.
@@ -38,7 +39,7 @@ makeup_shades <-
 #### Save data ####
 
 write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv")) 
-
+write_parquet(fashion_tones, here::here("inputs/data/fashion_tones.parquet"))
 write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv")) 
 
 write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv")) 

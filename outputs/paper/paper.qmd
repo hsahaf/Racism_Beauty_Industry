@@ -141,9 +141,29 @@ cleaned_makeup_shades<-
 cleaned_makeup_shades<-
   cleaned_makeup_shades |>
   filter(group == 0|group == 1|group == 2|group == 3|group == 4)
-  
 ```
+# Introduction
 
+The beauty industry has been a huge part of self-expression for the greater part of human history. The use of makeup and decorative clothing is not new, and while self-expression used to be more individualized, the commercialized and cultural nature of the industry leaves something to be said about the systems that are in place. It is a very large industry, consisting of fashion, makeup, skin and haircare, which are include both products and services. "In the United States alone, the beauty services sector employs over 670,000 people, and its job growth outlook is “faster than average” according to BLS data at a rate of 13% (2016-2026). According to a study, it was worth $532.43 billion in 2017 and is expected to reach a market value of $805.61 billion by 2023"[@market]. 
+
+The makeup industry specifically has seen a lot of growth with the arrival of Sephora and Ulta, large retailers who host the products of a variety of brands both low and high end. This has popularized the notion of "indie brands", who have gained popularity by prioritizing high quality ingredients and affordability, allowing more people access to better products. However, all aspects of the beauty space still remain hesitant to uplift and empower people of all walks of life, especially people of color. 
+The purpose of this paper is to explore the impact of the beauty industry's historically racist standards, and to explore whether they are still in place today. It is the fashion and makeup industry that will be the primary focus of this analysis. To explore racism in the fashion industry, the heart of the fashion culture, the covers of high fashion magazine Vogue, will be studied. The complexions of the models on the Vogue covers from 2000 to 2018 will be analyzed in order to extrapolate the inclusivity of the future of fashion. To analyze the makeup industry, the most popular foundation lines of the top beauty brands in the United States will be studied to explore the distribution of shades across the various complexions to see how many people of color are supported and provided for.
+
+# Data {#sec-data}
+## Data Management
+All analysis on the data sets were done using R [@citeR]. The data was read in, cleaned, and manipulated using `dplyr`[@dan], `tidyverse` [@tidy], `arrow`[@adam] and `janitor` [@janice]. The graphs and tables in this paper were coded using the following packages: `ggplot2` [@gabe], `kableExtra`[@kev], `knitr` [@nat], `readr` [@ron], and `RColorBrewer`[@ryan].
+
+## Source and Sampling
+In order to conduct an analysis on the various parts of the beauty industry, three separate data sets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd. A closer look is taken at Vogue using the first two data sets used for the article *Colorism in High Fashion* [@high_f]. All covers of Vogue from the year 2000 to 2018 are analyzed and categorized in these data sets. The female models on each cover are identified, and then their skin tones are filtered out of the cover, and an average color value is assigned based on the all skin tone pixels. These color values are then drained of any hue or saturation and therefore assigned a lightness value based on how light or deep the complexion of the model is, which allows for the comparison of all models on the covers of Vogue over the span of 8 years. The first data set contains the name of the model, date of their appearance on Vogue, the hex code of their skin tone, and their lightness value once the hue and saturation has been removed. This includes multiple appearances of the same model. The second data set contains the names of the models, the hex code of their skin tone, the number of covers they have made appearances in, and their average lightness value across these appearances.
+
+The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States.
+
+##Key Features:
+This paper explores the estimand how does the depth of your complexion impact your representation and the products made available for you in the fashion and makeup industry. This is explored through the lightness or complexion value. The hues and saturation are removed skin tones to get an idea of how light or dark a complexion is in order to assign it a value from 0 to 1, zero being the deepest complexion, and 1 being the palest. The fashion data sets contain data from 96 Vogue covers over the span of an 8 year period. The same lightness value is assigned to the various foundation shades offered by some of the biggest brands in the United states. The makeup data set contains data about the foundation lines of 16 major beauty brands in America.
+
+
+# Results
+@fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is measured on a scale from 0 to 1, 1 being extremely pale in skin tone, and 0 being extremely deep. There is a general trend present almost immediately, in that across the entire 8 year period, Vogue has consistently had lighter skinned individuals with a lightness value of 0.5 to 0.8 on their covers. It has only been after around 2009 that we see a model on Vogue with a complexion deeper than 0.4.
 ```{r}
 #| message: false
 #| warning: false
@@ -187,9 +207,9 @@ cleaned_fashion_frequency |>
     ),
     digits = 2
   )
-
 ```
 
+@tbl-appearances is a table of all the models on Vogue who have had more than 4 appearances on the covers of Vogue between 2000 and 2018. In all of the names on this list, Rihanna is the only black woman, and her average lightness value across these five appearances has been fairly mid-toned, at a lightness value of 0.62.
 
 ```{r}
 #| warning: false
@@ -202,15 +222,15 @@ cleaned_fashion_tones|>
   filter(model=="Rihanna")|>
   ggplot(mapping = aes(x = Year, y = lightness_value, color = model)) +
   geom_point()+
+  theme_minimal() +
   labs(
     title = "Rihanna: A Case Study in White-Washing",
     y = "Complexion Value",
     color = "Model"
   )
-
-  
 ```
 
+@fig-whitewashing takes a closer look at Vogue's presentation of Rihanna's skin tone on her five appearances. Vogue has been publicly accused of whitewashing Rihanna's complexion on some of her covers, and it is apparent that only after 2016 does her lightness value drop below 0.4 [@whitewashed]. While lighting and editing can account for some fluctuations in the lightness value, but it does not explain the extent of the contrast between her first three appearances and her most recent two.
 
 ```{r}
 #| warning: false
@@ -229,6 +249,7 @@ cleaned_fashion_tones|>
   )
 ```
 
+@fig-deepest takes a closer look at the fluctuations in lightness values in the appearances on the models with the deepest complexions on Vogue. Rihanna has had the highest number of appearances at 5 total covers from 2000 to 2018, followed by Lupita Nyongo, at 4. Among these models, Lupita Nyongo has the deepest complexion and her appearances on Vogue are the most recent, her last two being in 2015 and in 2018. The fluctuation is apparent in her appearances as well, in that it is only in her most recent cover that her lightness value is shown to be deeper than 0.3. 
 
 ```{r}
 #| warning: false
@@ -248,6 +269,7 @@ cleaned_fashion_tones|>
 
 ```
 
+@fig-all_white shows the fluctuation in the lightness values of the top four models with the greatest number of covers on Vogue. All four of these models are white, and all of them have made appearances in 6 or more covers. Vogue's preferences for tanned white women is clear in that in the span of 8 years, the lightness value rarely drops below 0.6.
 
 ```{r}
 #| message: false
@@ -270,6 +292,8 @@ cleaned_makeup_shades|>
 
 ```
 
+@tbl-shades is a table of all of the major beauty brands that are based in the United States, and the number of shades in their main foundation line.
+
 ```{r}
 #| warning: false
 #| echo: false
@@ -281,9 +305,16 @@ cleaned_makeup_shades|>
   group_by(brand)|>
   ggplot(aes(x = lightness_value, color = brand)) +
   stat_ecdf(geom = "point") +
-  theme_classic()
+  theme_minimal()+ 
+  labs(
+    x = "Lightness Value of Skintone",
+    title = "The Shade Distribution of US Bestselling Foundation Lines",
+    color = "Brand"
+    )
 
 ```
+
+@fig-bestsellers takes a closer look at the inclusivity of the bestselling foundation lines across some of the largest beauty brands across the United States of America. It is clear that there are a greater number of shades available for people with lighter skin tones, with a lightness value of 0.6 or lighter, across all of the major brands. However, for people with a complexion that is a hair deeper than a medium skin tone, the number of shades become sparse, and the distribution spreads out as the lightness value becomes deeper than 0.5.
 ```{r}
 #| warning: false
 #| echo: false
@@ -295,8 +326,17 @@ cleaned_makeup_shades|>
   group_by(brand)|>
   ggplot(aes(x = lightness_value, color = brand)) +
   stat_ecdf(geom = "point") +
-  theme_classic()
+  theme_minimal()+
+  labs(
+    x = "Lightness Value of Skintone",
+    title = "The Shade Distribution of Top BiPOC-Owned Foundations",
+    color = "Brand"
+    )
 ```
+
+@fig-bipoc looks at the shade distributions of the retailers with owners that are black, indigenous, or other people of color. The distribution is much more even, and all of these beauty brands provide options for people that are on both sides of the spectrum, complexions with lightness values deeper than 0.3, as well as complexions with lightness values paler than 0.8.
+
+
 
 ```{r}
 #| warning: false
@@ -309,69 +349,41 @@ cleaned_makeup_shades|>
   ggplot(cleaned_makeup_shades, mapping = aes(x = brand, y = lightness_value)) + 
   geom_boxplot() +
   geom_jitter(alpha = 0.3, width = 0.15, height = 0) +
-  theme_minimal()
+  theme_minimal() +
+  labs(
+    x = "Brand",
+    y = "Lightness Value of Skintone",
+    title = "The Shade Distribution of Largest Foundation Shade Ranges Sold in the US"
+    )
   
 ```
 
-# Introduction
-
-
-You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
-
-
-
-# Data {#sec-data}
-## Data Management
-All analysis on the data sets were done using R [@citeR]. The data was read in, cleaned, and manipulated using `dplyr`[@dan], `tidyverse` [@tidy], and `janitor` [@janice]. The graphs and tables in this paper were coded using the following packages: `ggplot2` [@gabe], `kableExtra`[@kev], `knitr` [@nat], `readr` [@ron], and `RColorBrewer`[@ryan].
-
-## Source and Sampling
-In order to conduct an analysis on the various parts of the beauty industry, three separate data sets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd. A closer look is taken at Vogue using the first two data sets used for the article *Colorism in High Fashion* [@high_f]. All covers of Vogue from the year 2000 to 2018 are analyzed and categorized in these data sets. The female models on each cover are identified, and then their skin tones are filtered out of the cover, and an average color value is assigned based on the all skin tone pixels. These color values are then drained of any hue or saturation and therefore assigned a lightness value based on how light or deep the complexion of the model is, which allows for the comparison of all models on the covers of Vogue over the span of 8 years. The first data set contains the name of the model, date of their appearance on Vogue, the hex code of their skin tone, and their lightness value once the hue and saturation has been removed. This includes multiple appearances of the same model. The second data set contains the names of the models, the hex code of their skin tone, the number of covers they have made appearances in, and their average lightness value across these appearances.
-
-The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States. 
-
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-```
-
-# Results
-@fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is measured on a scale from 0 to 1, 1 being extremely pale in skin tone, and 0 being extremely deep. There is a general trend present almost immediately, in that across the entire 8 year period, Vogue has consistently had lighter skinned individuals with a lightness value of 0.5 to 0.8 on their covers. It has only been after around 2009 that we see a model on Vogue with a complexion deeper than 0.4.
-
-@tbl-appearances is a table of all the models on Vogue who have had more than 4 appearances on the covers of Vogue between 2000 and 2018. In all of the names on this list, Rihanna is the only black woman, and her average lightness value across these five appearances has been fairly midtoned, at a lightness value of 0.62.
-
-@fig-whitewashing takes a closer look at Vogue's presentation of Rihanna's skintone on her five appearances. Vogue has been publicly accused of whitewashing Rihanna's complexion on some of her covers, and it is apparent that only after 2016 does her lightness value drop below 0.4 [@whitewashed]. While lighting and editing can account for some fluctuations in the lightness value, but it does not explain the extent of the contrast between her first three appearances and her most recent two.
-
-@fig-deepest takes a closer look at the fluctuations in lightness values in the appearances on the models with the deepest complexions on Vogue. Rihanna has had the highest number of appearances at 5 total covers from 2000 to 2018, followed by Lupita Nyongo, at 4. Amongst these models, Lupita Nyongo has the deepest complexion and her appearances on Vogue are the most recent, her last two being in 2015 and in 2018. The fluctuation is apparent in her appearances as well, in that it is only in her most recent cover that her lightness value is shown to be deeper than 0.3. 
-
-@fig-all_white shows the fluctuation in the lightness values of the top four models with the greatest number of covers on Vogue. All four of these models are white, and all of them have made appearances in 6 or more covers. Vogue's preferences for tanned white women is clear in that in the span of 8 years, the lightness value rarely drops below 0.6.
-
-@tbl-shades is a table of all of the major beauty brands that are based in the United States, and the number of shades in their main foundation line.
-
-@fig-bestsellers takes a closer look at the inclusivity of the bestselling foundation lines across some of the largest beauty brands across the United States of America. It is clear that there are a greater number of shades available for people with lighter skin tones, with a lightness value of 0.6 or lighter, across all of the major brands. However, for people with a complexion that is a hair deeper than a medium skin tone, the number of shades become sparse, and the distribution spreads out as the lightness value becomes deeper than 0.5.
-
-@fig-bipoc looks at the shade distributions of the retailers with owners that are black, indigenous, or other people of color. The distribution is much more even, and all of these beauty brands provide options for people that are on both sides of the spectrum, complexions with lightness values deeper than 0.3, as well as complexions with lightness values paler than 0.8.
-
 @fig-bigboys looks at the distribution across the beauty brands based in the United States with a foundation line with more than 25 shades. The contrast between the number of shades provided for people with light to medium complexions (0.6-1) and the lack thereof in terms of the number of shades for people with deeper complexions (0-0.35) is apparent.
-
 
 # Discussion
 
-
-## First discussion point {#sec-first-point}
+## Scarcity in the Beauty Industry {#sec-first-point}
 
 The same trend exists across the entire beauty industry. The deeper your complexion, the less options there are available for you. There are far less doors open for people of color in the beauty space, which causes several issues to compound. There is intersectionality at present in the communities of people impacted by this cycle of racism. Not only are these individuals at a disadvantage in society because they are women, but the issues are compounded further if they are individuals of color. These industries feed into each other, the less representation there is for black and brown women in fashion, the less options will be made available in the beauty industry and vice versa. The lack of representation creates a scarcity mindset. These women feel like they are the exception rather than the norm, and without the options available, without the same advantage of seeing people like you succeed, you are less likely to feel safe in these spaces and less confident when it comes to seeking to be in them. But the presence of black and brown women in these spaces has a significant impact. 
 
 An example of this is in the beauty industry. The 'Pull Up or Shut Up' movement in 2020 forced beauty brands to reveal how many BiPOC women were staff members and in senior leadership positions[@pullup]. It pushed for transparency in their marketing claims and resulted in a significant increase in consumer awareness, customers were now able to support brands that supported them. However, the same cannot be said for the fashion industry. The beauty industry is a commercial space that is not as difficult to break into through the rise of beauty influences, but high fashion is still considered to be a very elitist institution. BiPOC women have the power to revolutionize the beauty industry as a whole, but the lack of representation makes the path significantly harder. The compounding racism bleeds into other industries as well, such as television and film, and which hurts young girls the most. Looking into a world that has not made any room for you can be a very difficult and disheartening thing to overcome for children. Despite claims made by major institutions, this data reveals that it is only recently that black and brown women have been able to break into the industry, and it still has a long way to go in terms of actually uplifting and empowering them.
 
-## Second discussion point
+## Idealistic Beauty Standards
 
-## Third discussion point
+According to @fig-fullspread, there is a very gradual shift of a great number of appearances on Vogue of models with complexions that are deeper than 0.5, but it only recently in 2018, with Lupita Nyongo's cover with Vogue in 2018, that we see a model with a much deeper complexion than what is the norm for Vogue. According to @fig-bestsellers, a very similar trend is visible in that in the top 6 bestselling foundation brands in the United states, the number of shades providing for people of color is disappointingly sparse in comparison to the number of foundation shades offered for people who have a skin tone paler than a lightness value of 0.6. 
+
+The fact of the matter is, there is a hierarchy present from light to dark. Even amongst black people, the deeper their complexion the more push back they recieve from the beauty industry. The issue with this, is that it creates an idealistic beauty standard. No matter where you are on the spectrum of complexions, you are encouraged to be paler in order to fit in. This is idealistic and racist standard is propped up by microaggressions all over the beauty industry, as well as in society overall. "We found 130 products on Sephora’s and Ulta’s websites that use a sequential number system to label their shades. Of those, 97% put their lighter shades, and thus the customers that use those shades, first.."[@truth]. The way that beauty products are named, the way that they are displayed, the amounts of lighter shades that retailers keep in stock, all of these systems prioritize people with lighter skin. The problem with the way racism is addressed today is that all of these efforts are based in public apologies and pretty speeches. There are systems that are in place that uphold the racist standard, and when we apply these standards to women of color, some of the most disenfranchised groups in society, no amount of pretty speeches will heal a problem that has been hundreds of years in the making. The hierarchy that exists that pushes this standard of acceptability within society based on how pale or deep you are has the power to further divide people, and it is only right to question who stands to gain from this.
+
+## The Compounding Effect of Racism 
+
+It is interesting to note that within the black models, featured on Vogue, the same people are featured multiple times, and the number of black women Vogue does not grow very much over time. It is the journey of getting to where lighter-skinned people are naturally that is frustratingly difficult. "Addressing racial inequity in the beauty industry is a $2.6 billion opportunity [@billion]". The black consumer base is there, there is a need for better products for black women and women of color, and yet there is so much more to addressing the racism in the industry than meets the eye.  @fig-bestsellers look at the distribution of the foundation shade ranges of the best selling brands in the United States of America. @fig-bipoc takes a closer look at the efficiency and inclusivity of the shade distributions when the owner/CEO is black, indigenous, or woman of color. The difference between the two distributions are drastic, highlighting the power and all encompassing benefit of having a woman of color in a senior leadership position in the industry.
+
+The problem is, beauty products from black owned brands are not making enough to survive in the industry. The lack of representation translates to the business side of the beauty industry as well. There is very limited selection in drugstores and department stores, making it very difficult for the customer to even get access to these products in the first place. It is even more diffult for Black-owned businesses to gain a share of the market. As a result, they cannot get access in order to develop a loyal base of customers. There are no studies done on the needs of people of color, so business owners struggle to validate the need for their brand in the industry. It is harder to build a supportive network of individuals to support a business owner on the entrepreneurial journey. On every step of the way, black womena and women of color face obstacles that threaten their success. It is a system that needs to be addressed on the institutional level, which means that all major institutions need to put systems in place to support these women on every level, media and representation, marketing, research, and business.
 
 ## Weaknesses and next steps
 
-Weaknesses and next steps should also be included.
+
+
 
 \newpage
 
