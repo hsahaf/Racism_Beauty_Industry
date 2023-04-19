@@ -1,19 +1,36 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Simulates data about the bias in the industry
+# Author: Huda Sahaf
+# Date: April 12th 2023
+# Contact: huda.sahaf@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: -
+# Any other information needed? -
 
 
 #### Workspace setup ####
 library(tidyverse)
-# [...UPDATE THIS...]
+library(tibble)
 
 #### Simulate data ####
-# [...ADD CODE HERE...]
+
+set.seed(250)
+
+simulated_beauty_data <-
+  tibble(
+    "Model" = c(1:250),
+    "Lightness_Value" = sample(
+      x = c(1:100) /100,
+      size = 250,
+      replace = TRUE),
+    
+    "Vogue Appearances" = sample(
+      x = c(1:10),
+      size = 250, 
+      replace = TRUE)
+    
+  )
+simulated_beauty_data
 
 
 

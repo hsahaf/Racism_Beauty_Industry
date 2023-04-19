@@ -32,31 +32,31 @@ library(scales)
 #| include: false
 #| warning: false
 #| message: false
-# fashion_tones <-
-#   read.csv(
-#     file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/faces.csv", 
-#     skip = 0 
-#   )
-# 
-# fashion_frequency <-
-#   read.csv(
-#     file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/models.csv", 
-#     skip = 0 
-#   )
-# 
-# makeup_shades <-
-#   read.csv(
-#     file = "https://raw.githubusercontent.com/the-pudding/data/master/makeup-shades/shades.csv", 
-#     skip = 0 
-#   )
-# 
-# #### Save data ####
-# 
-# write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv")) 
-# 
-# write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv")) 
-# 
-# write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv")) 
+fashion_tones <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/faces.csv",
+    skip = 0
+  )
+
+fashion_frequency <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/models.csv",
+    skip = 0
+  )
+
+makeup_shades <-
+  read.csv(
+    file = "https://raw.githubusercontent.com/the-pudding/data/master/makeup-shades/shades.csv",
+    skip = 0
+  )
+
+#### Save data ####
+
+write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv"))
+
+write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv"))
+
+write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv"))
          
 ```
 
@@ -65,16 +65,16 @@ library(scales)
 #| warning: false
 #| message: false
 ### Clean Fashion Tones Dataset: 
-# cleaned_fashion_tones <-
-#   clean_names(fashion_tones)
-# 
-# cleaned_fashion_tones <-
-#   cleaned_fashion_tones |>
-#   rename(
-#     skintone = tone,
-#     lightness_value = l
-#   )
-# head(cleaned_fashion_tones)
+cleaned_fashion_tones <-
+  clean_names(fashion_tones)
+
+cleaned_fashion_tones <-
+  cleaned_fashion_tones |>
+  rename(
+    skintone = tone,
+    lightness_value = l
+  )
+head(cleaned_fashion_tones)
 ```
 
 
@@ -85,15 +85,15 @@ library(scales)
 #| message: false
 
 ### Simplifying Dates: Fashion Tones Data Set:
-# cleaned_fashion_tones<-
-#   cleaned_fashion_tones |>
-#   separate(
-#     col = date,
-#     into = c("Month", "Day", "Year"),
-#     sep = "/"
-#   ) |>
-#   mutate(cleaned_fashion_tones, clean_date = paste(Year, Month, Day, sep = "-"))
-#   str(cleaned_fashion_tones$clean_date)
+cleaned_fashion_tones<-
+  cleaned_fashion_tones |>
+  separate(
+    col = date,
+    into = c("Month", "Day", "Year"),
+    sep = "/"
+  ) |>
+  mutate(cleaned_fashion_tones, clean_date = paste(Year, Month, Day, sep = "-"))
+  str(cleaned_fashion_tones$clean_date)
 
 ```
 
@@ -103,17 +103,17 @@ library(scales)
 #| echo: false
 #| message: false
 
-# ### Clean Fashion Frequency Data Set: 
-# cleaned_fashion_frequency<-
-#   clean_names(fashion_frequency)
-# 
-# cleaned_fashion_frequency <-
-#   cleaned_fashion_frequency |>
-#   rename(
-#     skintone = tone,
-#     lightness_value = l,
-#     num_covers = n_covers
-#   )
+### Clean Fashion Frequency Data Set:
+cleaned_fashion_frequency<-
+  clean_names(fashion_frequency)
+
+cleaned_fashion_frequency <-
+  cleaned_fashion_frequency |>
+  rename(
+    skintone = tone,
+    lightness_value = l,
+    num_covers = n_covers
+  )
 
 ```
 
@@ -124,23 +124,23 @@ library(scales)
 #| message: false
 
 ### Clean Makeup Shades Data Set:
-# cleaned_makeup_shades <-
-#   clean_names(makeup_shades)
-# 
-# cleaned_makeup_shades<-
-#   cleaned_makeup_shades |>
-#   rename(
-#     hue = h,
-#     lightness = l,
-#     saturation = s,
-#     value = v,
-#     hex_code = hex
-#   )|>
-#   mutate(lightness_value = lightness/100)
-# 
-# cleaned_makeup_shades<-
-#   cleaned_makeup_shades |>
-#   filter(group == 0|group == 1|group == 2|group == 3|group == 4)
+cleaned_makeup_shades <-
+  clean_names(makeup_shades)
+
+cleaned_makeup_shades<-
+  cleaned_makeup_shades |>
+  rename(
+    hue = h,
+    lightness = l,
+    saturation = s,
+    value = v,
+    hex_code = hex
+  )|>
+  mutate(lightness_value = lightness/100)
+
+cleaned_makeup_shades<-
+  cleaned_makeup_shades |>
+  filter(group == 0|group == 1|group == 2|group == 3|group == 4)
   
 ```
 
