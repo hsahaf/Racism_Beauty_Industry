@@ -32,31 +32,31 @@ library(scales)
 #| include: false
 #| warning: false
 #| message: false
-fashion_tones <-
-  read.csv(
-    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/faces.csv", 
-    skip = 0 
-  )
-
-fashion_frequency <-
-  read.csv(
-    file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/models.csv", 
-    skip = 0 
-  )
-
-makeup_shades <-
-  read.csv(
-    file = "https://raw.githubusercontent.com/the-pudding/data/master/makeup-shades/shades.csv", 
-    skip = 0 
-  )
-
-#### Save data ####
-
-write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv")) 
-
-write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv")) 
-
-write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv")) 
+# fashion_tones <-
+#   read.csv(
+#     file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/faces.csv", 
+#     skip = 0 
+#   )
+# 
+# fashion_frequency <-
+#   read.csv(
+#     file = "https://raw.githubusercontent.com/the-pudding/data/master/vogue/models.csv", 
+#     skip = 0 
+#   )
+# 
+# makeup_shades <-
+#   read.csv(
+#     file = "https://raw.githubusercontent.com/the-pudding/data/master/makeup-shades/shades.csv", 
+#     skip = 0 
+#   )
+# 
+# #### Save data ####
+# 
+# write_csv(fashion_tones, here::here("inputs/data/fashion_tones.csv")) 
+# 
+# write_csv(fashion_frequency, here::here("inputs/data/fashion_frequency.csv")) 
+# 
+# write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv")) 
          
 ```
 
@@ -65,16 +65,16 @@ write_csv(makeup_shades, here::here("inputs/data/makeup_shades.csv"))
 #| warning: false
 #| message: false
 ### Clean Fashion Tones Dataset: 
-cleaned_fashion_tones <-
-  clean_names(fashion_tones)
-
-cleaned_fashion_tones <-
-  cleaned_fashion_tones |>
-  rename(
-    skintone = tone,
-    lightness_value = l
-  )
-head(cleaned_fashion_tones)
+# cleaned_fashion_tones <-
+#   clean_names(fashion_tones)
+# 
+# cleaned_fashion_tones <-
+#   cleaned_fashion_tones |>
+#   rename(
+#     skintone = tone,
+#     lightness_value = l
+#   )
+# head(cleaned_fashion_tones)
 ```
 
 
@@ -84,16 +84,16 @@ head(cleaned_fashion_tones)
 #| echo: false
 #| message: false
 
-### Simplifying Dates: Fashion Tones Dataset:
-cleaned_fashion_tones<-
-  cleaned_fashion_tones |>
-  separate(
-    col = date,
-    into = c("Month", "Day", "Year"),
-    sep = "/"
-  ) |>
-  mutate(cleaned_fashion_tones, clean_date = paste(Year, Month, Day, sep = "-"))
-  str(cleaned_fashion_tones$clean_date)
+### Simplifying Dates: Fashion Tones Data Set:
+# cleaned_fashion_tones<-
+#   cleaned_fashion_tones |>
+#   separate(
+#     col = date,
+#     into = c("Month", "Day", "Year"),
+#     sep = "/"
+#   ) |>
+#   mutate(cleaned_fashion_tones, clean_date = paste(Year, Month, Day, sep = "-"))
+#   str(cleaned_fashion_tones$clean_date)
 
 ```
 
@@ -103,17 +103,17 @@ cleaned_fashion_tones<-
 #| echo: false
 #| message: false
 
-### Clean Fashion Frequency Data Set: 
-cleaned_fashion_frequency<-
-  clean_names(fashion_frequency)
-
-cleaned_fashion_frequency <-
-  cleaned_fashion_frequency |>
-  rename(
-    skintone = tone,
-    lightness_value = l,
-    num_covers = n_covers
-  )
+# ### Clean Fashion Frequency Data Set: 
+# cleaned_fashion_frequency<-
+#   clean_names(fashion_frequency)
+# 
+# cleaned_fashion_frequency <-
+#   cleaned_fashion_frequency |>
+#   rename(
+#     skintone = tone,
+#     lightness_value = l,
+#     num_covers = n_covers
+#   )
 
 ```
 
@@ -124,23 +124,23 @@ cleaned_fashion_frequency <-
 #| message: false
 
 ### Clean Makeup Shades Data Set:
-cleaned_makeup_shades <-
-  clean_names(makeup_shades)
-
-cleaned_makeup_shades<-
-  cleaned_makeup_shades |>
-  rename(
-    hue = h,
-    lightness = l,
-    saturation = s,
-    value = v,
-    hex_code = hex
-  )|>
-  mutate(lightness_value = lightness/100)
-
-cleaned_makeup_shades<-
-  cleaned_makeup_shades |>
-  filter(group == 0|group == 1|group == 2|group == 3|group == 4)
+# cleaned_makeup_shades <-
+#   clean_names(makeup_shades)
+# 
+# cleaned_makeup_shades<-
+#   cleaned_makeup_shades |>
+#   rename(
+#     hue = h,
+#     lightness = l,
+#     saturation = s,
+#     value = v,
+#     hex_code = hex
+#   )|>
+#   mutate(lightness_value = lightness/100)
+# 
+# cleaned_makeup_shades<-
+#   cleaned_makeup_shades |>
+#   filter(group == 0|group == 1|group == 2|group == 3|group == 4)
   
 ```
 
@@ -361,7 +361,9 @@ The data set behind The Pudding article, *Beauty Brawl* is the third data set us
 
 ## First discussion point {#sec-first-point}
 
-The same trend exists across the entire beauty industry. The deeper your complexion, the less options there are available for you. There are far less doors open for people of color in the beauty space, which causes several issues to compound. There is intersectionality at present in the communities of people impacted by this cycle of racism. Not only are these individuals at a disadvantage in society because they are women, but the issues are compounded further if they are individuals of color. These industries feed into each other, the less representation there is for black and brown women in fashion, the less options will be made available in the beauty industry and vice versa. The lack of representation creates a scarcity mindset. These women feel like they are the exception rather than the norm, and without the options available, without the same advantage of seeing people like you succeed, you are less likely to feel safe in these spaces and less confident when it comes to seeking to be in them. But the presence of black and brown women in these spaces has a significant impact. An example of this is in the beauty industry. The 'Pull Up or Shut Up' movement in 2020 forced beauty brands to reveal how many BiPOC women were staff members and in senior leadership positions[@pullup]. It pushed for transparency in their marketing claims and resulted in a significant increase in consumer awareness, customers were now able to support brands that supported them. However, the same cannot be said for the fashion industry. The beauty industry is a commercial space that is not as difficult to break into through the rise of beauty influences, but high fashion is still considered to be a very elitist institution. BiPOC women have the power to revolutionize the beauty industry as a whole, but the lack of representation makes the path significantly harder. The compounding racism bleeds into other industries as well, such as television and film, and which hurts young girls the most. Looking into a world that has not made any room for you can be a very difficult and disheartening thing to overcome for children. Despite claims made by major institutions, this data reveals that it is only recently that black and brown women have been able to break into the industry, and it still has a long way to go in terms of actually uplifting and empowering them.
+The same trend exists across the entire beauty industry. The deeper your complexion, the less options there are available for you. There are far less doors open for people of color in the beauty space, which causes several issues to compound. There is intersectionality at present in the communities of people impacted by this cycle of racism. Not only are these individuals at a disadvantage in society because they are women, but the issues are compounded further if they are individuals of color. These industries feed into each other, the less representation there is for black and brown women in fashion, the less options will be made available in the beauty industry and vice versa. The lack of representation creates a scarcity mindset. These women feel like they are the exception rather than the norm, and without the options available, without the same advantage of seeing people like you succeed, you are less likely to feel safe in these spaces and less confident when it comes to seeking to be in them. But the presence of black and brown women in these spaces has a significant impact. 
+
+An example of this is in the beauty industry. The 'Pull Up or Shut Up' movement in 2020 forced beauty brands to reveal how many BiPOC women were staff members and in senior leadership positions[@pullup]. It pushed for transparency in their marketing claims and resulted in a significant increase in consumer awareness, customers were now able to support brands that supported them. However, the same cannot be said for the fashion industry. The beauty industry is a commercial space that is not as difficult to break into through the rise of beauty influences, but high fashion is still considered to be a very elitist institution. BiPOC women have the power to revolutionize the beauty industry as a whole, but the lack of representation makes the path significantly harder. The compounding racism bleeds into other industries as well, such as television and film, and which hurts young girls the most. Looking into a world that has not made any room for you can be a very difficult and disheartening thing to overcome for children. Despite claims made by major institutions, this data reveals that it is only recently that black and brown women have been able to break into the industry, and it still has a long way to go in terms of actually uplifting and empowering them.
 
 ## Second discussion point
 

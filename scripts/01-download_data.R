@@ -14,7 +14,7 @@ library(tidyverse)
 library(here)
 library(dplyr)
 
-#There are three data sets used for this analysis. All three are data sets used
+#There are three data sets used for this analysis. All three are data sets used in
 # the Puddings Publications, specifically, Beauty Brawl and Colorism in High Fashion.
 #### Download data ####
 fashion_tones <-
