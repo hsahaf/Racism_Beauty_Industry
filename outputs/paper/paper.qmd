@@ -147,22 +147,28 @@ cleaned_makeup_shades<-
 The beauty industry has been a huge part of self-expression for the greater part of human history. The use of makeup and decorative clothing is not new, and while self-expression used to be more individualized, the commercialized and cultural nature of the industry leaves something to be said about the systems that are in place. It is a very large industry, consisting of fashion, makeup, skin and haircare, which are include both products and services. "In the United States alone, the beauty services sector employs over 670,000 people, and its job growth outlook is “faster than average” according to BLS data at a rate of 13% (2016-2026). According to a study, it was worth $532.43 billion in 2017 and is expected to reach a market value of $805.61 billion by 2023"[@market]. 
 
 The makeup industry specifically has seen a lot of growth with the arrival of Sephora and Ulta, large retailers who host the products of a variety of brands both low and high end. This has popularized the notion of "indie brands", who have gained popularity by prioritizing high quality ingredients and affordability, allowing more people access to better products. However, all aspects of the beauty space still remain hesitant to uplift and empower people of all walks of life, especially people of color. 
-The purpose of this paper is to explore the impact of the beauty industry's historically racist standards, and to explore whether they are still in place today. It is the fashion and makeup industry that will be the primary focus of this analysis. To explore racism in the fashion industry, the heart of the fashion culture, the covers of high fashion magazine Vogue, will be studied. The complexions of the models on the Vogue covers from 2000 to 2018 will be analyzed in order to extrapolate the inclusivity of the future of fashion. To analyze the makeup industry, the most popular foundation lines of the top beauty brands in the United States will be studied to explore the distribution of shades across the various complexions to see how many people of color are supported and provided for.This paper explores the estimand how does the lightness value of an individuals complexion impact your representation and the products made available for you in the fashion and makeup industry.
+
+The purpose of this paper is to explore the impact of the beauty industry's historically racist standards, and to explore whether they are still in place today. It is the fashion and makeup industry that will be the primary focus of this analysis. To explore racism in the fashion industry, the heart of the fashion culture, the covers of high fashion magazine Vogue, will be studied. The complexions of the models on the Vogue covers from 2000 to 2018 will be analyzed in order to extrapolate the inclusivity of the future of fashion. To analyze the makeup industry, the most popular foundation lines of the top beauty brands in the United States will be studied to explore the distribution of shades across the various complexions to see how many people of color are supported and provided for. This paper explores the estimand how does the lightness value of an individuals complexion impact your representation and the products made available for you in the fashion and makeup industry.
 
 # Data {#sec-data}
+
 ## Data Management
+
 All analysis on the data sets were done using R [@citeR]. The data was read in, cleaned, and manipulated using `dplyr`[@dan], `tidyverse` [@tidy], `arrow`[@adam] and `janitor` [@janice]. The graphs and tables in this paper were coded using the following packages: `ggplot2` [@gabe], `kableExtra`[@kev], `knitr` [@nat], `readr` [@ron], and `RColorBrewer`[@ryan].
 
 ## Source and Sampling
+
 In order to conduct an analysis on the various parts of the beauty industry, three separate data sets were used. The Pudding is a digital publication that makes its data sets open to the public @pudd. A closer look is taken at Vogue using the first two data sets used for the article *Colorism in High Fashion* [@high_f]. All covers of Vogue from the year 2000 to 2018 are analyzed and categorized in these data sets. The female models on each cover are identified, and then their skin tones are filtered out of the cover, and an average color value is assigned based on the all skin tone pixels. These color values are then drained of any hue or saturation and therefore assigned a lightness value based on how light or deep the complexion of the model is, which allows for the comparison of all models on the covers of Vogue over the span of 8 years. The first data set contains the name of the model, date of their appearance on Vogue, the hex code of their skin tone, and their lightness value once the hue and saturation has been removed. This includes multiple appearances of the same model. The second data set contains the names of the models, the hex code of their skin tone, the number of covers they have made appearances in, and their average lightness value across these appearances.
 
 The data set behind The Pudding article, *Beauty Brawl* is the third data set used in this paper [@bbshades]. It contains data about the foundation shade ranges through lightness values of multiple beauty brands around the world. For the sake of this paper, we are focusing on beauty retailers based in the US, especially since Vogue is also based in the United States.
 
-##Key Features:
+## Key Features
+
 This paper explores the estimand how does the depth of your complexion impact your representation and the products made available for you in the fashion and makeup industry. This is explored through the lightness or complexion value. The hues and saturation are removed skin tones to get an idea of how light or dark a complexion is in order to assign it a value from 0 to 1, zero being the deepest complexion, and 1 being the palest. The fashion data sets contain data from 96 Vogue covers over the span of an 8 year period. The same lightness value is assigned to the various foundation shades offered by some of the biggest brands in the United states. The makeup data set contains data about the foundation lines of 16 major beauty brands in America.
 
 
 # Results
+
 @fig-fullspread is a graph of the lightness value of every model that has been on the cover of Vogue from 2000 to 2018. Lightness value is measured on a scale from 0 to 1, 1 being extremely pale in skin tone, and 0 being extremely deep. There is a general trend present almost immediately, in that across the entire 8 year period, Vogue has consistently had lighter skinned individuals with a lightness value of 0.5 to 0.8 on their covers. It has only been after around 2009 that we see a model on Vogue with a complexion deeper than 0.4.
 ```{r}
 #| message: false
@@ -175,11 +181,12 @@ cleaned_fashion_tones$clean_date <- ymd(cleaned_fashion_tones$clean_date)
 
 entire_spread <- cleaned_fashion_tones |>
   ggplot(aes(x = lightness_value, y = clean_date)) +
-  geom_point(aes(color = lightness_value < 0.4)) + 
+  geom_point(aes(color = lightness_value < 0.4), alpha = 0.5) + 
   labs(
     x = "Lightness Value of Vogue Models",
     y = "Date of Cover",
-    title = "Complexions of Models on Covers of Vogue: 2000-2018"
+    title = "Complexions of Models on Covers of Vogue: 2000-2018",
+    color = "Lightness is <0.4?"
   ) +
   theme_classic()
   
@@ -192,7 +199,7 @@ print(entire_spread)
 #| message: false
 #| warning: false
 #| echo: false
-#| tbl-cap: "Models With More than 5 Appearances on Vogue"
+#| tbl-cap: "Models With More than five Appearances on Vogue"
 #| label: tbl-appearances
 ### Table 1: All Models With More than 5 Appearances on Vogue 
 cleaned_fashion_frequency |>
@@ -205,7 +212,9 @@ cleaned_fashion_frequency |>
       "Number of Covers", 
       "Lightness Value"
     ),
-    digits = 2
+    digits = 2,
+    booktabs = TRUE,
+    linesep = ""
   )
 ```
 
@@ -287,7 +296,9 @@ cleaned_makeup_shades|>
     col.names = c(
       "Makeup Brand",
       "Number of Foundation Shades"
-      )
+      ),
+        booktabs = TRUE,
+    linesep = ""
   )
 
 ```
@@ -304,7 +315,7 @@ cleaned_makeup_shades|>
   filter(group == 2)|>
   group_by(brand)|>
   ggplot(aes(x = lightness_value, color = brand)) +
-  stat_ecdf(geom = "point") +
+  stat_ecdf(geom = "point", alpha = 0.6) +
   theme_minimal()+ 
   labs(
     x = "Lightness Value of Skintone",
@@ -352,9 +363,9 @@ cleaned_makeup_shades|>
   theme_minimal() +
   labs(
     x = "Brand",
-    y = "Lightness Value of Skintone",
-    title = "The Shade Distribution of Largest Foundation Shade Ranges Sold in the US"
-    )
+    y = "Lightness Value of Skintone"
+    ) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
   
 ```
 
